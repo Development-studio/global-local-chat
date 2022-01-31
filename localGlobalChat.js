@@ -7,7 +7,7 @@
 //
 //Allows to use local and global chat in your game!
 //Author: qIMIXERIp vk.com/svtlng
-//Version 2.0
+//Version 2.0.1
 
 //config
 let radius = 10 //Radius of local message (in blocks)
@@ -20,13 +20,13 @@ let headChat = true //Displays messages above player's head
 let useMuteSystem = true //Set to true if you are using this script witn MixerAPI
 //yes, I could make it in JSON but I don't want to
 
-function setHeadMsg(mes) {
+function setHeadMsg(mes, plr) {
 	//player.rename(name + "\n>> " + message)
-	player.rename(`${name}\n>> ${mes}`)
+	plr.rename(`${name}\n>> ${mes}`)
 	if(mes.length >= smallMessage){
-		setTimeout(setRname, mes.length * 500)
+		setTimeout(plr.rename(plr.realName), mes.length * 500)
 	}else{
-		setTimeout(setRname, mes.length * 1000)
+		setTimeout(plr.rename(plr.realName), mes.length * 1000)
 	}
 }
 
@@ -55,18 +55,18 @@ mc.listen('onChat', function(player, msg){
 	}
 	if (headChat && !muteMsg) {
 		if (isGlobal){
-			msg = msg.replace('!','')
-			setHeadMsg(msg)
+			msg = msg.replace(globalSymbol,'')
+			setHeadMsg(msg, player)
 		}else{
-			setHeadMsg(msg)
+			setHeadMsg(msg, player)
 		}
 	}
 	if (!muteMsg){
 		if (isGlobal){
-			sendMsgToChat(1, msg)
+			sendMsgToChat(1, msg, rname, x, y, z)
 			return false
 		}else{
-			sendMsgToChat(0, msg)
+			sendMsgToChat(0, msg, rname, x, y, z)
 			return false
 		}
 	}
