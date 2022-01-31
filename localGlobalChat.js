@@ -21,7 +21,7 @@ let useMuteSystem = true //Set to true if you are using this script witn MixerAP
 //yes, I could make it in JSON but I don't want to
 
 function setHeadMsg(mes, plr) {
-	//player.rename(name + "\n>> " + message)
+	let name = plr.realName
 	plr.rename(`${name}\n>> ${mes}`)
 	if(mes.length >= smallMessage){
 		setTimeout(plr.rename(plr.realName), mes.length * 500)
