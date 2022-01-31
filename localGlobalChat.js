@@ -23,10 +23,13 @@ let useMuteSystem = true //Set to true if you are using this script witn MixerAP
 function setHeadMsg(mes, plr) {
 	let name = plr.realName
 	plr.rename(`${name}\n>> ${mes}`)
+	function nameback(){
+		plr.rename(plr.realName)
+	}
 	if(mes.length >= smallMessage){
-		setTimeout(plr.rename(plr.realName), mes.length * 500)
+		setTimeout(nameback, mes.length * 500)
 	}else{
-		setTimeout(plr.rename(plr.realName), mes.length * 1000)
+		setTimeout(nameback, mes.length * 1000)
 	}
 }
 
